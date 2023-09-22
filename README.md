@@ -6,6 +6,20 @@ This repository hosts Gazebo simulation files for the Boston Dynamics Spot, as w
 
 This repo notionally depends on gRPC C++, Spot SDK, among others. Some are included as git-submodules, others should be retrieved independently. For instance, gRPC C++ libraries must be installed locally after compiling from source. This repo *should* still build if you do not have gRPC C++ libs, but the gRPC communication components will not be available.
 
+To install the gRPC C++ dependencies, clone it locally. I used the v1.30.0 version of gRPC repo as:
+git clone -b v1.30.0 --recursive https://github.com/grpc/grpc.git
+
+Then follow the instructions to build gRPC with cmake https://github.com/grpc/grpc/blob/master/BUILDING.md#building-with-cmake, namely:
+$ mkdir -p cmake/build
+$ cd cmake/build
+$ cmake ../..
+$ make
+$ make install
+
+This should make the install findable by CMake. You may also need to install empy (3.3.4 worked) and pyyaml (6.0.1 worked). After that make sure to run generate_protos.sh as in $ ./generate_protos.sh
+
+The above should be enough for CMake and catkin to locate all dependencies
+
 ## Run time dependencies
 
 ### Gazebo environments
